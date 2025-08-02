@@ -1,4 +1,4 @@
-# simple-timeline
+# Timeline
 
 ![alt text](https://github.com/kaufmajo/web1-timeline/blob/main/public/img/Screenshot_1.png?raw=true)
 
