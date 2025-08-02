@@ -1,0 +1,65 @@
+<?php $this->layout('layout::default', ['title' => 'EGLi (Manage) - Config']) ?>
+
+<!-- nav -->
+<nav class="navbar navbar-dark bg-danger mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="/manage/home-read">Home</a>
+        <a class="navbar-brand fw-bold text-white" href="/manage/home-initconfig">Config</a>
+        <a class="navbar-brand fw-bold text-white" href="/cleanup" target="cleanup">Cleanup</a>
+        <a class="navbar-brand fw-bold text-white" href="/manage/home-phpinfo">PHP</a>
+        <?php if ($security): ?>
+            <a class="navbar-brand fw-bold text-white" href="/app-logout">Abmelden</a>
+        <?php endif; ?>
+    </div>
+</nav>
+
+<!-- container -->
+<div class="container my-5">
+    <h1 class="fw-bold mb-5">Config</h1>
+    <pre>root<?php outputConfig($myInitConfig); ?></pre>
+</div>
+
+<?php
+function outputConfig(array $configArray, string $prefix = "|  "): void
+{
+    echo "\n";
+    foreach ($configArray as $key => $value) {
+        echo $prefix;
+        if (!is_numeric($key)) {
+            echo '' . $key . ': ';
+        }
+        if (is_array($value)) {
+            outputConfig($value, $prefix . "|  ");
+        } else {
+            echo match ($value) {
+                true => 'yes',
+                false => 'no',
+                default => $value,
+            };
+        }
+        echo "\n";
+    }
+    echo '';
+}
+
+// function outputConfig(array $configArray): void
+// {
+//     echo '<ul class="list-group">';
+//     foreach ($configArray as $key => $value) {
+//         echo '<li class="list-group-item">';
+//         if (!is_numeric($key)) {
+//             echo '<b>' . $key . ':</b> ';
+//         }
+//         if (is_array($value)) {
+//             outputConfig($value);
+//         } else {
+//             echo match ($value) {
+//                 true => 'yes',
+//                 false => 'no',
+//                 default => $value,
+//             };
+//         }
+//         echo '</li>';
+//     }
+//     echo '</ul>';
+// }

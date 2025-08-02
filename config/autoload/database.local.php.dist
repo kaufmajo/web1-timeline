@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=mydbname',
+        'user' => 'developer1',
+        'password' => 'password'
+    ]
+];

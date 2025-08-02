@@ -1,0 +1,126 @@
+<?php
+
+use App\Enum\TerminStatusEnum;
+use App\Service\AttributeService;
+use App\Service\HelperService;
+
+// init
+$terminCollection = $data;
+$form = $form;
+$datalist = $datalist;
+
+// attributes
+$elementAttributeService = new AttributeService([], $attributes ?? []);
+
+// user
+$loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentity() : false;
+
+?>
+<div class="container-fluid p-0">
+    <div class="fs-1 d-flex align-items-center justify-content-center py-1 px-3 mx-0 sticky-top <?= $this->color()['text-bg-main'] ?>">
+        <div class="position-absolute top-0 end-0 mt-1 me-3">
+            <a class="<?= $this->color()['link-main'] ?> text-decoration-none" href="<?= $this->urlpool()->get() ?>"><i class="bi bi-x-lg fs-1"></i></a>
+        </div>
+        <span class="fw-light">
+            Suchen
+        </span>
+    </div>
+    <div class="col-12 offset-md-2 col-md-8 p-2">
+        <div class="my-5">
+            <?php if ($form->getMessages()) : ?>
+                <?php $this->insert('partial::formerror', ['form' => $form, 'showMessages' => false]); ?>
+            <?php endif; ?>
+            <?php $form->setAttributes([])->prepare() ?>
+            <form action="<?= $form->getAttribute('action') ?>" method="<?= $form->getAttribute('method') ?>" name="<?= $form->getName() ?>" id="<?= $form->getName() ?>">
+                <div class="input-group">
+                    <?php $this->insert('helper::input', [
+                        'element' => $form->get('search_suchtext'),
+                        'attributes' => [
+                            'placeholder' => '',
+                            'class' => 'form-control text-sm-center border-end-0',
+                            "autocomplete" => "off",
+                        ],
+                        'datalist' => [
+                            'list' => $datalist,
+                            'id' => 'search-datalist',
+                        ],
+                        'showErrorMessage' => false,
+                    ]) ?>
+                    <span class="input-group-text m-0 p-0">
+                        <button id="input-search-submit" name="submit-button" type="submit" class="btn <?= $this->color()['btn-main'] ?>">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <?php if ($terminCollection->count()) : ?>
+            <?php while ($terminCollection->current) : ?>
+                <?php
+                $termin = $terminCollection->current;
+                $previous = $terminCollection->previous;
+                $wrapperTag = TerminStatusEnum::GESTRICHEN->value === $termin['termin_status'] ? ['del'] : [];
+                ?>
+                <?php if ($terminCollection->hasTermin()) : ?>
+                    <?php if (
+                        !$terminCollection->isInMemory('searchlist-anchor-date', date('Y-m-d'))
+                        && $previous && $previous['datum_datum'] <= date('Y-m-d')
+                        && $termin['datum_datum'] >= date('Y-m-d')
+                    ): ?>
+                        <div class="row border-bottom <?= $this->color()['text-bg-indicator'] ?>" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('searchlist-anchor-date', date('Y-m-d'))) ?>>
+                            <div class="col-12 fs-5 fw-light text-center">
+                                <i class="bi bi-arrows-collapse"></i>
+                            </div>
+                        </div>
+                    <?php endif ?>
+                    <div class="row py-3 <?= !$terminCollection->isLast() ? "border-bottom" : "" ?>" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('searchlist-anchor-date', $termin['datum_datum'])) ?>>
+                        <div class="col-12 fs-5 fw-light">
+                            <div class="fs-6 d-flex justify-content-between w-100">
+                                <div>
+                                    <?= HelperService::format_displayDate($termin['termin_datum_start'], $termin['termin_datum_ende'], [
+                                        'single' => $terminCollection->isDatumThisYear() ? 'd MMMM' : 'd MMMM yy',
+                                        'left' => $terminCollection->isDatumThisYear() ? 'd [MMMM]' : 'd [MMMM yy]',
+                                        'right' => $terminCollection->isDatumThisYear() ? 'd MMMM' : 'd MMMM yy'
+                                    ]) ?>
+                                </div>
+                                <?php if ($termin['termin_datum_start'] === $termin['termin_datum_ende']) : ?>
+                                    <div>
+                                        <?= $this->escape(HelperService::format_displayDate($termin['termin_datum_start'], null, ['single' => 'eeee'])) ?>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                            <?php $this->insert('partial::wrappertags', ['type' => 'open', 'tags' => $wrapperTag]); ?>
+                            <a class="link-body-emphasis text-decoration-none" href="<?= $this->urlpool()->get(query_params: ['id' => $termin['termin_id'], 'date' => $termin['termin_datum_start']], fragment: $termin['termin_datum_start']) ?>">
+                                <?= $termin['termin_betreff'] ?>
+                                <?php if ($termin['termin_mitvon']) : ?>
+                                    (<?= $termin['termin_mitvon'] ?>)
+                                <?php endif ?>
+                            </a>
+                            <?php $this->insert('partial::wrappertags', ['type' => 'close', 'tags' => $wrapperTag]); ?>
+                            <?php if ($loggedIn) : ?>
+                                <div class="dropdown position-absolute">
+                                    <button class="ps-0 btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-list"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/manage/termin-update/<?= $termin['termin_id'] ?>">Bearbeiten</a></li>
+                                        <li><a class="dropdown-item" href="/manage/termin-copy/<?= $termin['termin_id'] ?>">Kopieren</a></li>
+                                        <li><a class="dropdown-item" href="/manage/termin-delete/<?= $termin['termin_id'] ?>">Löschen</a></li>
+                                    </ul>
+                                </div>
+                                <div>&nbsp;</div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php
+                $terminCollection->next();
+                ?>
+            <?php endwhile; ?>
+        <?php elseif (!empty($_GET)) : ?>
+            <div class="alert alert-secondary text-center my-3 fw-bold" role="alert">
+                Es wurden keine Termine gefunden.
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

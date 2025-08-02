@@ -1,0 +1,1 @@
+{"version":1,"defects":{"AppTest\\Handler\\PingHandlerTest::testResponse":4,"AppTest\\Handler\\TestHandlerTest::testResponse":7},"times":{"AppTest\\Handler\\PingHandlerTest::testResponse":0.003,"AppTest\\Handler\\TestHandlerTest::testResponse":0.013}}
