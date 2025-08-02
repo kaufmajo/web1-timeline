@@ -17,10 +17,6 @@ class FormStorage
 
     public function get(string $key): ?FormInterface
     {
-        if (isset($this->formArray[$key])) {
-            return $this->formArray[$key];
-        }
-
-        return null;
+        return $this->formArray[$key] ?? null;
     }
 }

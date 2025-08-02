@@ -46,7 +46,7 @@ class HomeStatsHandler extends AbstractBaseHandler
                 continue;
             }
 
-            $url = parse_url($d['history_url']);
+            $url = parse_url((string)$d['history_url']);
 
             if (isset($url['path'])) {
                 $parts = preg_split('/\//', $url['path'], -1, PREG_SPLIT_NO_EMPTY);

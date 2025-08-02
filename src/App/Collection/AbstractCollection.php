@@ -23,8 +23,8 @@ abstract class AbstractCollection implements CollectionInterface
     private int|string|null $previousKey;
     private int|string|null $currentKey;
     private int|string|null $nextKey;
-    public int|string|null $firstKey;
-    public int|string|null $lastKey;
+    public int|string|null $firstKey = null;
+    public int|string|null $lastKey = null;
     public array $memory = [];
 
     public function __construct(?array $collection = null)

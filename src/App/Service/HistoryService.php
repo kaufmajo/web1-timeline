@@ -11,9 +11,7 @@ class HistoryService
     protected const CONST_THROTTLE       = 'Throttle';
     protected const CONST_THROTTLE_COUNT = 7;
 
-    protected Connection $dbal;
-
-    public function __construct(Connection $dbal)
+    public function __construct(protected Connection $dbal)
     {
         $this->dbal = $dbal;
     }

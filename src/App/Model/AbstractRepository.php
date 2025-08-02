@@ -14,20 +14,13 @@ use function in_array;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-    protected Connection $dbalConnection;
-
-    private EntityHydratorInterface $entityHydrator;
-
     protected HydratorInterface $hydrator;
 
-    protected EntityInterface $prototype;
-
-    public function __construct(Connection $dbalConnection, EntityHydratorInterface $entityHydrator, AbstractEntity $prototype)
-    {
-        $this->dbalConnection  = $dbalConnection;
-        $this->entityHydrator  = $entityHydrator;
-        $this->prototype = $prototype;
-    }
+    public function __construct(
+        protected Connection $dbalConnection,
+        private readonly EntityHydratorInterface $entityHydrator,
+        protected EntityInterface $prototype
+    ) {}
 
     public function setPrototype(AbstractEntity $prototype): void
     {

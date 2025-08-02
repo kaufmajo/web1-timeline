@@ -11,16 +11,10 @@ use RuntimeException;
 
 abstract class AbstractCommand implements CommandInterface
 {
-    protected Connection $dbalConnection;
-
-    protected EntityHydratorInterface $entityHydrator;
-
-    public function __construct(Connection $dbalConnection, EntityHydratorInterface $entityHydrator)
-    {
-        $this->dbalConnection = $dbalConnection;
-
-        $this->entityHydrator = $entityHydrator;
-    }
+    public function __construct(
+        protected Connection $dbalConnection,
+        protected EntityHydratorInterface $entityHydrator
+    ) {}
 
     public function extractEntity(EntityInterface $entity): array
     {

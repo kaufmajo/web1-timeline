@@ -35,7 +35,7 @@ class MediaStorageProvider implements MediaStorageProviderInterface
 
         $filename = 'media_' . $media->getMediaId();
 
-        $pathinfo = pathinfo($media->getMediaName());
+        $pathinfo = pathinfo((string)$media->getMediaName());
 
         return isset($pathinfo['extension']) ? $filename . '.' . $pathinfo['extension'] : $filename;
     }
@@ -112,11 +112,11 @@ class MediaStorageProvider implements MediaStorageProviderInterface
                 default => false,
             };
         } else {
-            $pathinfo = pathinfo($media->getMediaName());
+            $pathinfo = pathinfo((string)$media->getMediaName());
 
             return isset($pathinfo['extension']) && match ($pathinfo['extension']) {
-                    'gif', 'jpg', 'jpeg', 'png' => true,
-                    default => false,
+                'gif', 'jpg', 'jpeg', 'png' => true,
+                default => false,
             };
         }
     }
@@ -139,7 +139,7 @@ class MediaStorageProvider implements MediaStorageProviderInterface
 
     public static function getExtension(MediaEntityInterface $media): string
     {
-        return pathinfo($media->getMediaName(), PATHINFO_EXTENSION);
+        return pathinfo((string)$media->getMediaName(), PATHINFO_EXTENSION);
     }
 
     /**

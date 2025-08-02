@@ -16,56 +16,43 @@ use Psr\Log\LoggerInterface;
 
 class DbalLoggingMiddleware implements Middleware
 {
-    private LoggerInterface $logger;
-
-    public function __construct(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
+    public function __construct(
+        private readonly LoggerInterface $logger
+    ) {}
 
     public function wrap(Driver $driver): Driver
     {
         return new class($driver, $this->logger) implements Driver {
 
-            private Driver $driver;
-            private LoggerInterface $logger;
-
-            public function __construct(Driver $driver, LoggerInterface $logger)
-            {
-                $this->driver = $driver;
-                $this->logger = $logger;
-            }
+            public function __construct(
+                private readonly Driver $driver,
+                private readonly LoggerInterface $logger
+            ) {}
 
             public function connect(array $params): DriverConnection
             {
                 $conn = $this->driver->connect($params);
 
                 return new class($conn, $this->logger) implements DriverConnection {
-                    private DriverConnection $conn;
-                    private LoggerInterface $logger;
 
-                    public function __construct(DriverConnection $conn, LoggerInterface $logger)
-                    {
-                        $this->conn = $conn;
-                        $this->logger = $logger;
-                    }
+                    public function __construct(
+                        private readonly DriverConnection $conn,
+                        private readonly LoggerInterface $logger
+                    ) {}
 
                     public function prepare(string $sql): \Doctrine\DBAL\Driver\Statement
                     {
                         $stmt = $this->conn->prepare($sql);
 
                         return new class($stmt, $sql, $this->logger) implements \Doctrine\DBAL\Driver\Statement {
-                            private \Doctrine\DBAL\Driver\Statement $stmt;
-                            private string $sql;
-                            private LoggerInterface $logger;
+
                             private array $boundParams = [];
 
-                            public function __construct(\Doctrine\DBAL\Driver\Statement $stmt, string $sql, LoggerInterface $logger)
-                            {
-                                $this->stmt = $stmt;
-                                $this->sql = $sql;
-                                $this->logger = $logger;
-                            }
+                            public function __construct(
+                                private readonly \Doctrine\DBAL\Driver\Statement $stmt,
+                                private readonly string $sql,
+                                private readonly LoggerInterface $logger
+                            ) {}
 
                             public function bindValue(int|string $param, mixed $value, ParameterType $type): void
                             {

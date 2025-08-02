@@ -27,9 +27,7 @@ class LoginHandler extends AbstractBaseHandler implements RequestHandlerInterfac
 
     private const REDIRECT_ATTRIBUTE = 'authentication:redirect';
 
-    private PhpSession $adapter;
-
-    public function __construct(PhpSession $adapter)
+    public function __construct(private PhpSession $adapter)
     {
         $this->adapter = $adapter;
     }

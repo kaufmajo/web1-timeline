@@ -52,22 +52,23 @@ class MediaIndexHandler implements RequestHandlerInterface
         // prepare headers
         $headers = [
             'Content-Type'        => (new finfo(FILEINFO_MIME))->file(MediaStorageProvider::getFilePath($mediaEntity)),
-            'Content-Disposition' => 'inline; filename=' . basename($mediaEntity->getMediaName()),
+            'Content-Disposition' => 'inline; filename=' . basename((string)$mediaEntity->getMediaName()),
         ];
 
         // media is an image
         if (MediaStorageProvider::isAnImage($mediaEntity)) {
-            
+
             $cacheConfig = $this->getMyInitConfig('cache');
 
             // return thumb or original
             if (0 < $widthParam && 1400 >= $widthParam) {
                 if (!MediaStorageProvider::isThumbInStorage($mediaEntity, $widthParam)) {
-                    
+
                     ThumbService::createThumbnail(
                         MediaStorageProvider::getFilePath($mediaEntity),
                         MediaStorageProvider::getThumbFilePath($mediaEntity, $widthParam),
-                        $widthParam, $heightParam
+                        $widthParam,
+                        $heightParam
                     );
                 }
 
@@ -87,9 +88,9 @@ class MediaIndexHandler implements RequestHandlerInterface
             return new Response($stream, 200, array_merge(
                 $headers,
                 [
-                    'Pragma' => 'public', 
-                    'Expires' => '0', 
-                    'Cache-Control' => 'must-revalidate', 
+                    'Pragma' => 'public',
+                    'Expires' => '0',
+                    'Cache-Control' => 'must-revalidate',
                     'Content-Length' => "{$stream->getSize()}"
                 ],
             ));

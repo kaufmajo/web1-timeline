@@ -148,7 +148,7 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
                                     ['column' => 't1.media_tag', 'search' => '%[value]%'],
                                 ] as $column
                             ) {
-                                $quoteValue = $this->getDbalConnection()->quote(str_replace('[value]', $v, $column['search']), \Doctrine\DBAL\ParameterType::STRING);
+                                $quoteValue = $this->getDbalConnection()->quote(str_replace('[value]', $v, $column['search']));
                                 $suchtextFields[] = $qb->expr()->like($column['column'], $quoteValue);
                             }
                         }

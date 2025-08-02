@@ -16,8 +16,8 @@ class TerminEntityHydrator extends AbstractEntityHydrator
         // hydrate from parent class
         $object = parent::hydrate($data, $object);
 
-        $object->setTerminZeitStart(substr($object->getTerminZeitStart(), 0, -3));
-        $object->setTerminZeitEnde(substr($object->getTerminZeitEnde(), 0, -3));
+        $object->setTerminZeitStart(substr((string)$object->getTerminZeitStart(), 0, -3));
+        $object->setTerminZeitEnde(substr((string)$object->getTerminZeitEnde(), 0, -3));
 
         return $object;
     }
