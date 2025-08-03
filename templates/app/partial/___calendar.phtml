@@ -55,14 +55,16 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                         <li class="p-2 <?= $listClass ?>" <?= HelperService::getAnchorAttribute($termin['datum_datum']) ?>>
                             <div class="d-flex justify-content-between w-100 fw-light text-secondary-emphasis">
                                 <div>
-                                    <?php if ($terminCollection->isDatumToday()) : ?>
-                                        <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
-                                    <?php elseif ($terminCollection->isDatumFirstDayOfMonth()) : ?>
+                                    <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
                                         <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-xxl-inline-block"></i>
+                                    <?php elseif ($terminCollection->isDatumToday()) : ?>
+                                        <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
                                     <?php endif ?>
-                                    <span class="me-1">
-                                        <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
-                                    </span>
+                                    <?php if (!$terminCollection->isDatumToday()) : ?>
+                                        <span class="me-1">
+                                            <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
+                                        </span>
+                                    <?php endif ?>
                                     <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
                                         <span class="d-none d-xxl-inline-block">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'MMMM',]) ?>
@@ -88,7 +90,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                     <img class="d-block d-xxl-none my-2 w-100" src="<?= $this->media($termin['termin_image']) ?>?w=1400" alt="Thumbnail">
                                 </a>
                             <?php endif ?>
-                            <div class="body-text fs-5 fw-light pb-2 <?php if (!$termin['termin_zeit_ganztags']) : ?>d-flex flex-wrap<?php endif ?>">
+                            <div class="body-text fw-light pb-2 <?php if (!$termin['termin_zeit_ganztags']) : ?>d-flex flex-wrap<?php endif ?>">
                                 <div class="me-2 text-secondary">
                                     <?php if (!$termin['termin_zeit_ganztags']) : ?>
                                         <?= $this->escape(substr($termin['termin_zeit_start'], 0, 5)) ?>
@@ -135,7 +137,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                     <?php endif ?>
                                     <?php if ((new DateTime($termin['datum_datum']))->format('Y-m-d') !== (new DateTime())->format('Y-m-d')) : ?>
                                         <?php if ($termin['_is_new'] || $termin['_is_updated']) : ?>
-                                            <div class="fs-6">
+                                            <div>
                                                 <?php if ($termin['_is_new']) : ?>
                                                     <!-- new indicator -->
                                                     <span class="badge <?= $this->color()['text-bg-indicator'] ?> fw-bold mt-1">Neu</span>
@@ -188,14 +190,14 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel<?= $termin['termin_id'] ?>">Aktion</h1>
+                                                            <h3 class="modal-title" id="exampleModalLabel<?= $termin['termin_id'] ?>">Aktion</h3>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="list-group list-group-flush">
-                                                                <a class="list-group-item list-group-item-action" href="/manage/termin-update/<?= $termin['termin_id'] ?>">Bearbeiten</a>
-                                                                <a class="list-group-item list-group-item-action" href="/manage/termin-copy/<?= $termin['termin_id'] ?>">Kopieren</a>
-                                                                <a class="list-group-item list-group-item-action" href="/manage/termin-delete/<?= $termin['termin_id'] ?>">Löschen</a>
+                                                                <a class="ps-0 list-group-item list-group-item-action" href="/manage/termin-update/<?= $termin['termin_id'] ?>">Bearbeiten</a>
+                                                                <a class="ps-0 list-group-item list-group-item-action" href="/manage/termin-copy/<?= $termin['termin_id'] ?>">Kopieren</a>
+                                                                <a class="ps-0 list-group-item list-group-item-action" href="/manage/termin-delete/<?= $termin['termin_id'] ?>">Löschen</a>
                                                             </div>
                                                         </div>
                                                     </div>
