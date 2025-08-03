@@ -50,7 +50,7 @@ class ThumbService
      * @param $targetWidth - desired output width
      * @param $targetHeight - desired output height or null
      */
-    public static function createThumbnail(string $src, string $dest, int $targetWidth, ?int $targetHeight = null): GdImage|false|null
+    public static function createThumbnail(string $src, string $dest, int $targetWidth, ?int $targetHeight = null): bool|null
     {
         // 1. Load the image from the given $src
         // - see if the file actually exists
