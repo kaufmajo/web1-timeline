@@ -68,14 +68,14 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                         && $termin['datum_datum'] >= date('Y-m-d')
                     ): ?>
                         <div class="row border-bottom <?= $this->color()['text-bg-indicator'] ?>" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('searchlist-anchor-date', date('Y-m-d'))) ?>>
-                            <div class="col-12 fs-5 fw-light text-center">
+                            <div class="col-12 fw-light text-center">
                                 <i class="bi bi-arrows-collapse"></i>
                             </div>
                         </div>
                     <?php endif ?>
                     <div class="row py-3 <?= !$terminCollection->isLast() ? "border-bottom" : "" ?>" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('searchlist-anchor-date', $termin['datum_datum'])) ?>>
-                        <div class="col-12 fs-5 fw-light">
-                            <div class="fs-6 d-flex justify-content-between w-100">
+                        <div class="col-12 fw-light">
+                            <div class="d-flex justify-content-between w-100">
                                 <div>
                                     <?= HelperService::format_displayDate($termin['termin_datum_start'], $termin['termin_datum_ende'], [
                                         'single' => $terminCollection->isDatumThisYear() ? 'd MMMM' : 'd MMMM yy',
