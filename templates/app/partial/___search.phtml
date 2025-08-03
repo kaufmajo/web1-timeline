@@ -26,7 +26,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
         </span>
     </div>
     <div class="col-12 offset-md-2 col-md-8 p-2">
-        <div class="my-5">
+        <div class="mt-5 mb-3">
             <?php if ($form->getMessages()) : ?>
                 <?php $this->insert('partial::formerror', ['form' => $form, 'showMessages' => false]); ?>
             <?php endif; ?>
