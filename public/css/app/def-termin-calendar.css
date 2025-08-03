@@ -15,23 +15,15 @@ ol>li {
     justify-content: flex-start;
     list-style: none;
     min-height: 100px;
-    /* min-height: auto; */
     overflow-y: auto;
 }
 
-@media (min-width: 1400px) {
-
-    html {
-        scroll-padding-top: 120px;
-    }
+@media (min-width: 992px) {
 
     ol {
         grid-template-columns: repeat(7, 1fr);
         height: calc(100vh - 68px);
     }
-}
-
-@media ((min-width: 1400px) and (max-height: 768px)) {
 
     ol>li {
         min-height: auto;

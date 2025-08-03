@@ -34,15 +34,15 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
         </a>
     </div>
     <div class="row m-0">
-        <div class="offset-md-2 col-md-8 offset-xxl-0 col-xxl px-0">
+        <div class="offset-md-2 col-md-8 offset-lg-0 col-lg px-0">
             <ol class="p-0 mb-0 bg-dark-subtle">
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Mo</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Di</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Mi</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Do</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Fr</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Sa</li>
-                <li class="d-none d-xxl-inline fw-bold p-2 fs-3 bg-body-tertiary text-secondary-emphasis">So</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Mo</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Di</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Mi</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Do</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Fr</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-light-subtle text-secondary-emphasis">Sa</li>
+                <li class="d-none d-lg-inline fw-bold p-2 fs-3 bg-body-tertiary text-secondary-emphasis">So</li>
                 <?php foreach ($terminCollection as $termin) : ?>
                     <?php
                     $wrapperTag = TerminStatusEnum::GESTRICHEN->value === $termin['termin_status'] ? ['del'] : [];
@@ -50,13 +50,13 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                     <?php if ($terminCollection->isFirst() || $terminCollection->current['datum_datum'] !== $terminCollection->previous['datum_datum']) : ?>
                         <?php
                         $listClass = $terminCollection->isDatumSunday() ? 'bg-body-tertiary' : ($terminCollection->isDatumWithinReferenceMonth() ? 'bg-light-subtle' : 'bg-light-subtle');
-                        $listClass .= !$terminCollection->isDatumWithinReferenceMonth() ? ' d-none d-xxl-block' : '';
+                        $listClass .= !$terminCollection->isDatumWithinReferenceMonth() ? ' d-none d-lg-block' : '';
                         ?>
                         <li class="p-2 <?= $listClass ?>" <?= HelperService::getAnchorAttribute($termin['datum_datum']) ?>>
                             <div class="d-flex justify-content-between w-100 fw-light text-secondary-emphasis">
                                 <div>
                                     <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
-                                        <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-xxl-inline-block"></i>
+                                        <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-lg-inline-block"></i>
                                     <?php elseif ($terminCollection->isDatumToday()) : ?>
                                         <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
                                     <?php endif ?>
@@ -66,13 +66,13 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                         </span>
                                     <?php endif ?>
                                     <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
-                                        <span class="d-none d-xxl-inline-block">
+                                        <span class="d-none d-lg-inline-block">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'MMMM',]) ?>
                                         </span>
                                     <?php endif ?>
                                 </div>
                                 <div>
-                                    <span class="d-xxl-none"><?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'eeee',]) ?></span>
+                                    <span class="d-lg-none"><?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'eeee',]) ?></span>
                                     <?php if ($loggedIn) : ?>
                                         <a class="link-secondary" href="/manage/termin-insert/<?= $terminCollection->getDatum()->format('Y-m-d') ?>" title="Anlegen"><i class="bi bi-plus-circle ms-2"></i></a>
                                     <?php endif ?>
@@ -87,7 +87,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                             ?>
                             <?php if ($termin['termin_image'] && $terminCollection->pushToMemory('image', $termin['termin_id'])) : ?>
                                 <a href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>" class="<?= $linkColor ?> text-decoration-none" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
-                                    <img class="d-block d-xxl-none my-2 w-100" src="<?= $this->media($termin['termin_image']) ?>?w=1400" alt="Thumbnail">
+                                    <img class="d-block d-lg-none my-2 w-100" src="<?= $this->media($termin['termin_image']) ?>?w=1400" alt="Thumbnail">
                                 </a>
                             <?php endif ?>
                             <div class="body-text fw-light pb-2 <?php if (!$termin['termin_zeit_ganztags']) : ?>d-flex flex-wrap<?php endif ?>">
