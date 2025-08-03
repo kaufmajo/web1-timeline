@@ -56,19 +56,17 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                             <div class="d-flex justify-content-between w-100 fw-light text-secondary-emphasis">
                                 <div>
                                     <?php if ($terminCollection->isDatumToday()) : ?>
-                                        <span class="badge <?= $this->color()['text-bg-today'] ?> fw-bold">Heute</span>
-                                    <?php else : ?>
-                                        <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
-                                            <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-xxl-inline-block"></i>
-                                        <?php endif ?>
-                                        <span class="me-1">
-                                            <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
+                                        <i class="bi bi-record-circle-fill <?= $this->color()['text-main'] ?> d-none d-xxl-inline-block me-1"></i>
+                                    <?php elseif ($terminCollection->isDatumFirstDayOfMonth()) : ?>
+                                        <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-xxl-inline-block"></i>
+                                    <?php endif ?>
+                                    <span class="me-1">
+                                        <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
+                                    </span>
+                                    <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
+                                        <span class="d-none d-xxl-inline-block">
+                                            <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'MMMM',]) ?>
                                         </span>
-                                        <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
-                                            <span class="d-none d-xxl-inline-block">
-                                                <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'MMMM',]) ?>
-                                            </span>
-                                        <?php endif ?>
                                     <?php endif ?>
                                 </div>
                                 <div>
