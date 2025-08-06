@@ -50,7 +50,8 @@ window.addEventListener('load', () => {
     for (let i = 0, len = gridCells.length; i < len; i++) {
         const container = gridCells[i];
         if (container.scrollHeight > container.clientHeight) {
-            container.scrollTo({ top: 20, behavior: 'smooth' });
+            //container.scrollTo({ top: 20, behavior: 'smooth' });
+            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
             setTimeout(() => container.scrollTo({ top: 0, behavior: 'smooth' }), 1000);
         }
     }
