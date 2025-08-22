@@ -6,31 +6,15 @@
     border-radius: 0 !important;
 }
 
-/*
-html, body {
-    height: 100%;
-}
-*/
-
 html {
     scroll-behavior: smooth;
 }
-
-/* body {
-    color: var(--bs-body-color);
-    background-color: var(--bs-body-bg);
-} */
 
 del,
 mark {
     padding-left: 0;
     padding-right: 0;
 }
-
-a {
-    /*text-decoration: none;*/
-}
-
 
 /*
  classes
