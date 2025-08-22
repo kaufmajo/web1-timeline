@@ -239,10 +239,10 @@
     </div>
     <div class="row my-1 g-2">
         <div class="col-md-2">
-            <?php $this->insert('helper::submit', ['element' => $terminForm->get('submit'), 'attributes' => ['class' => 'btn-secondary']]) ?>
+            <?php $this->insert('helper::submit', ['element' => $terminForm->get('submit'), 'attributes' => ['class' => $this->color()['btn-main']]]) ?>
         </div>
         <div class="col-md-2">
-            <?php $this->insert('helper::back', ['redirectUrl' => $redirectUrl, 'attributes' => ['class' => 'btn-secondary']]) ?>
+            <?php $this->insert('helper::back', ['redirectUrl' => $redirectUrl, 'attributes' => ['class' => $this->color()['btn-main']]]) ?>
         </div>
     </div>
 </form>
