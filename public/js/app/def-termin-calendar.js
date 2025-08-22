@@ -46,14 +46,54 @@ for (let i = 0, len = highlightElements.length; i < len; i++) {
 
 const gridCells = document.querySelectorAll("ol>li");
 
-window.addEventListener('load', () => {
-    for (let i = 0, len = gridCells.length; i < len; i++) {
-        const container = gridCells[i];
-        if (container.scrollHeight > container.clientHeight) {
-            container.scrollTo({ top: 20, behavior: 'smooth' });
-            setTimeout(() => container.scrollTo({ top: 0, behavior: 'smooth' }), 1000);
+// Utility: sleep for async/await
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function smoothScrollTo(container, target, duration) {
+    return new Promise(resolve => {
+        const start = container.scrollTop;
+        const distance = target - start;
+        const startTime = performance.now();
+
+        function step(currentTime) {
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Ease-in-out interpolation
+            const ease = 0.5 * (1 - Math.cos(Math.PI * progress));
+            container.scrollTop = start + distance * ease;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                resolve(); // Finish and resume async flow
+            }
+        }
+
+        requestAnimationFrame(step);
+    });
+}
+
+// Animate scrolling for one container
+async function animateScrolling(container) {
+    await smoothScrollTo(container, container.scrollHeight, 2000);
+    await sleep(0);
+    await smoothScrollTo(container, 0, 2000);
+}
+
+// On window load, scroll all overflowing gridCells one after the other
+window.addEventListener('load', async () => {
+    const tasks = [];
+    for (let container of gridCells) {
+        if (container.scrollHeight - container.clientHeight > 20) {
+            tasks.push(animateScrolling(container));
+            //await animateScrolling(container); // Wait for each to finish before next
         }
     }
+    await Promise.all(tasks); // Wait for all to finish (optional)
 });
 
 // ---------------------------------------------------------------------------
