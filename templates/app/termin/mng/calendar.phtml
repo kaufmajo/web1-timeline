@@ -6,13 +6,13 @@
 <script src="/js/app/def-termin-calendar.js?u=<?= REFRESH_STATIC_FILES ?>" type="module"></script>
 <?php $this->end() ?>
 <!-- nav -->
-<nav class="navbar navbar-dark bg-secondary">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="/manage/home-read">Home</a>
-        <a class="navbar-brand fw-bold" href="/">Ansicht</a>
-        <a class="navbar-brand fw-bold" href="/manage/media-read">Media</a>
-        <a class="navbar-brand fw-bold" href="/cleanup">Cleanup</a>
-        <a class="navbar-brand fw-bold" href="/app-logout" onclick="return confirm('Möchten Sie sich abmelden?')">Abmelden</a>
+<nav class="<?= $this->color()['text-bg-indicator'] ?> px-2 py-3">
+    <div class="container-fluid d-flex justify-content-between row-gap-2 column-gap-3 flex-wrap">
+        <a class="fs-5 fw-bold text-decoration-none" href="/manage/home-read">Home</a>
+        <a class="fs-5 fw-bold text-decoration-none" href="/">Ansicht</a>
+        <a class="fs-5 fw-bold text-decoration-none" href="/manage/media-read">Media</a>
+        <a class="fs-5 fw-bold text-decoration-none" href="/cleanup">Cleanup</a>
+        <a class="fs-5 fw-bold text-decoration-none" href="/app-logout" onclick="return confirm('Möchten Sie sich abmelden?')">Abmelden</a>
     </div>
 </nav>
 <?php $this->insert('app-partial::___calendar', [
