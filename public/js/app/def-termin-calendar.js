@@ -10,13 +10,13 @@ function handleReload() {
     let current_date = new Date();
     // process
     if ((current_date - loading_date) > (60 * 5 * 12 * 1000 * 3)) { // 60 * 5 * 12 * 1000 * 3 => 3 h
-        window.removeEventListener('focus', handleReload, false);
+        window.removeEventListener('visibilitychange', handleReload, false);
         alert("Webseite wird neu geladen.");
         window.location.href = "/?reload=" + pageDatetime;
     }
 }
 
-window.addEventListener('focus', handleReload, false);
+window.addEventListener('visibilitychange', handleReload, false);
 
 // ---------------------------------------------------------------------------
 // Jump to hash if none is given
