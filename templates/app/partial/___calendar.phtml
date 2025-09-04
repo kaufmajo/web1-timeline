@@ -57,10 +57,10 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                 <div>
                                     <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
                                         <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-lg-inline-block"></i>
-                                    <?php elseif ($terminCollection->isDatumToday()) : ?>
-                                        <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
                                     <?php endif ?>
-                                    <?php if (!$terminCollection->isDatumToday()) : ?>
+                                    <?php if ($terminCollection->isDatumToday()) : ?>
+                                        <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
+                                    <?php elseif (!$terminCollection->isDatumToday()) : ?>
                                         <span class="me-1">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
                                         </span>
