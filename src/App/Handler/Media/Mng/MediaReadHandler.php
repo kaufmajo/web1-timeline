@@ -42,7 +42,7 @@ class MediaReadHandler extends AbstractBaseHandler
         ];
 
         // check form
-        if (empty($_GET) || !$mngMediaSearchForm->isValid()) {
+        if ($_GET === [] || !$mngMediaSearchForm->isValid()) {
             return new HtmlResponse($this->templateRenderer->render('app::media/mng/read', $viewData));
         }
 
@@ -73,9 +73,6 @@ class MediaReadHandler extends AbstractBaseHandler
 
     public function getMappedMediaSearchValues(array $formData): array
     {
-        $searchValues             = [];
-        $searchValues['suchtext'] = $formData['search_suchtext'];
-
-        return $searchValues;
+        return ['suchtext' => $formData['search_suchtext']];
     }
 }

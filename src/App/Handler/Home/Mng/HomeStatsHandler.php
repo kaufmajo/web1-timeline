@@ -52,7 +52,7 @@ class HomeStatsHandler extends AbstractBaseHandler
                 $parts = preg_split('/\//', $url['path'], -1, PREG_SPLIT_NO_EMPTY);
 
                 if (count($parts) >= 2) {
-                    $url['path'] = '/' . $parts[0] . (! is_numeric($parts[1]) ? '/' . $parts[1] : '');
+                    $url['path'] = '/' . $parts[0] . (is_numeric($parts[1]) ? '' : '/' . $parts[1]);
                 }
             }
 

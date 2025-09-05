@@ -18,7 +18,7 @@ return RectorConfig::configure()
     ->withPreparedSets(deadCode: true)
     //->withTypeCoverageLevel(70)
     //->withDeadCodeLevel(70)
-    ->withCodeQualityLevel(30)
+    ->withCodeQualityLevel(70)
     ->withSkip([
         FirstClassCallableRector::class => [
             __DIR__ . '/src/App/Plates/Extension/ColorExtension.php',

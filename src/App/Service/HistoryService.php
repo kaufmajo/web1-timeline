@@ -33,11 +33,11 @@ class HistoryService
 
     public function insertThrottleRow(string $identifier = ''): static
     {
-        $identifier = $identifier ? '_' . $identifier : $identifier;
+        $sql = "INSERT INTO `tajo1_history` (`history_url`, `history_ip`) VALUES (?, ?)";
 
         $url = self::CONST_THROTTLE;
 
-        $sql = "INSERT INTO `tajo1_history` (`history_url`, `history_ip`) VALUES (?, ?)";
+        $identifier = $identifier !== '' ? '_' . $identifier : $identifier;
 
         $this->dbal->executeStatement($sql, [$url, $_SERVER["REMOTE_ADDR"] . $identifier]);
 
@@ -46,8 +46,6 @@ class HistoryService
 
     public function throttle(string $identifier = ''): void
     {
-        $identifier = $identifier ? '_' . $identifier : $identifier;
-
         $sql = "
               SELECT
                     COUNT(`history_url`) AS `Anzahl`
@@ -62,6 +60,8 @@ class HistoryService
                     `history_url`";
 
         $url = self::CONST_THROTTLE;
+
+        $identifier = $identifier !== '' ? '_' . $identifier : $identifier;
 
         $resultSet = $this->dbal->executeQuery($sql, [$_SERVER["REMOTE_ADDR"] . $identifier, $url]);
 

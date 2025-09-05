@@ -15,7 +15,7 @@ class EntityStorage
     {
         if ($entity instanceof EntityInterface) {
             $this->entityArray[$key] = $entity;
-        } elseif ($protoType) {
+        } elseif ($protoType instanceof EntityInterface) {
             $this->entityArray[$key] = $protoType;
         }
     }

@@ -43,10 +43,6 @@ abstract class AbstractRepository implements RepositoryInterface
             return false;
         }
 
-        if (in_array($params[$key], $falseValue, true)) {
-            return false;
-        }
-
-        return true;
+        return !in_array($params[$key], $falseValue, true);
     }
 }

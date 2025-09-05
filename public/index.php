@@ -11,7 +11,7 @@ if (PHP_SAPI === 'cli-server' && $_SERVER['SCRIPT_FILENAME'] !== __FILE__) {
     return false;
 }
 
-ini_set ( "session.cookie_lifetime" , 3600);
+ini_set("session.cookie_lifetime", 3600);
 
 // -------------------------
 // start custom bootstrap code
@@ -56,7 +56,7 @@ if (isset($_SERVER['HTTP_HOST']) &&     ($_SERVER['HTTP_HOST'] === 'localhost:88
 // -------------------------
 
 chdir(dirname(__DIR__));
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 /**
  * Self-called anonymous function that creates its own scope and keep the global namespace clean.

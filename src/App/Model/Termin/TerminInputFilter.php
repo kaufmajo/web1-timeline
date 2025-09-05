@@ -95,7 +95,7 @@ class TerminInputFilter extends InputFilter
                         'name'    => 'Regex',
                         'options' => [
                             'messages' => ['regexNotMatch' => 'Ungültige Uhrzeit, HH:mm'],
-                            'pattern'  => '/^([01]?[0-9]|2[0-3]):[0-5][0-9]/',
+                            'pattern'  => '/^([01]?\d|2[0-3]):[0-5]\d/',
                         ],
                     ],
                 ],
@@ -115,7 +115,7 @@ class TerminInputFilter extends InputFilter
                         'name'    => 'Regex',
                         'options' => [
                             'messages' => ['regexNotMatch' => 'Ungültige Uhrzeit, HH:mm'],
-                            'pattern'  => '/^([01]?[0-9]|2[0-3]):[0-5][0-9]/',
+                            'pattern'  => '/^([01]?\d|2[0-3]):[0-5]\d/',
                         ],
                     ],
                 ],
@@ -302,7 +302,7 @@ class TerminInputFilter extends InputFilter
                         'name'    => 'Regex',
                         'options' => [
                             'messages' => ['regexNotMatch' => 'Ungültige Eingabe'],
-                            'pattern'  => '/^(\-1|[0-9]+)$/',
+                            'pattern'  => '/^(\-1|\d+)$/',
                         ],
                     ],
                 ],

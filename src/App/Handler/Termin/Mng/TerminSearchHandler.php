@@ -48,7 +48,7 @@ class TerminSearchHandler extends AbstractTerminHandler
             'datalist'              => array_merge([['Sonntag'], ['Montag'], ['Dienstag'], ['Mittwoch'], ['Donnerstag'], ['Freitag'], ['Samstag']], $kategorieData, $betreffData, $mitvonData),
         ];
 
-        if (empty($_GET) || !$isFormValid) {
+        if ($_GET === [] || !$isFormValid) {
 
             return new HtmlResponse(
                 $this->templateRenderer->render('app::termin/mng/search', $viewData)

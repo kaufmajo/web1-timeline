@@ -190,10 +190,9 @@ class MediaEntity extends AbstractEntity implements MediaEntityInterface
 
     public function getEntityLabel(): array
     {
-        $return            = [];
-        $return['Name']    = $this->media_name;
-        $return['Anzeige'] = $this->media_anzeige;
-
-        return $return;
+        return [
+            'Name' => $this->media_name,
+            'Anzeige' => $this->media_anzeige
+        ];
     }
 }

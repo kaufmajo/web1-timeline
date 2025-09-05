@@ -253,7 +253,7 @@ class HelperService
     public static function getMonthFirstDayForCalender(DateTime|string $date): DateTimeInterface
     {
         if (is_string($date)) {
-            $date = $date ? new DateTimeImmutable($date) : new DateTimeImmutable();
+            $date = !empty($date) ? new DateTimeImmutable($date) : new DateTimeImmutable();
         }
 
         $start = $date->modify('first day of this month');
@@ -265,7 +265,7 @@ class HelperService
     public static function getMonthLastDayForCalender(DateTime|string $date): DateTimeInterface
     {
         if (is_string($date)) {
-            $date = $date ? new DateTimeImmutable($date) : new DateTimeImmutable();
+            $date = !empty($date) ? new DateTimeImmutable($date) : new DateTimeImmutable();
         }
 
         $ende = $date->modify('last day of this month');

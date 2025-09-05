@@ -59,7 +59,7 @@ class UrlpoolService
             $this->uri = new Uri();
 
             $this->routeName = 'default.root';
-        } elseif (empty($this->routeName)) {
+        } elseif ($this->routeName === '') {
 
             $this->uri = unserialize(end($urls));
 
@@ -74,9 +74,11 @@ class UrlpoolService
 
     public function get(array $params = [], array $query_params = [], bool $query_reset = false, int|string|false|null $fragment = null): string
     {
-        if (!$this->uri) $this->uri();
+        if (!$this->uri instanceof Uri) {
+            $this->uri();
+        }
 
-        parse_str(!$query_reset ? $this->uri->getQuery() : '', $query_array);
+        parse_str($query_reset ? '' : $this->uri->getQuery(), $query_array);
 
         return $this->getUrlHelper()->generate(
             $this->routeName,

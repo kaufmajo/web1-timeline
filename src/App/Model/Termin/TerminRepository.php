@@ -193,7 +193,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             $qb->setParameter('where_tage', $params['tage'], \Doctrine\DBAL\ArrayParameterType::INTEGER);
         }
 
-        return $conditions ? (string)$expr->and(...$conditions) : '';
+        return $conditions !== [] ? (string)$expr->and(...$conditions) : '';
     }
 
     public function fetchTermin(

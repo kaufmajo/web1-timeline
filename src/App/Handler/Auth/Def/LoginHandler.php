@@ -85,7 +85,7 @@ class LoginHandler extends AbstractBaseHandler implements RequestHandlerInterfac
         $session->unset(UserInterface::class);
 
         // Login was successful
-        if ($this->adapter->authenticate($request)) {
+        if ($this->adapter->authenticate($request) instanceof UserInterface) {
             $session->unset(self::REDIRECT_ATTRIBUTE);
             return new RedirectResponse($redirect);
         }

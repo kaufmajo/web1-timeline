@@ -42,7 +42,7 @@ class TerminSearchHandler extends AbstractTerminHandler
             'redirectUrl'           => $this->getUrlpoolService()->get(),
         ];
 
-        if (empty($_GET) || !$isFormValid) {
+        if ($_GET === [] || !$isFormValid) {
 
             return new HtmlResponse(
                 $this->templateRenderer->render('app::termin/def/search', $viewData)

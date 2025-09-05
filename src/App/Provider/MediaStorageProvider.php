@@ -147,7 +147,7 @@ class MediaStorageProvider implements MediaStorageProviderInterface
      */
     public static function isMediaInvalid(?MediaEntityInterface $media, ?bool $isUserLoggedIn = false): bool|string
     {
-        if (! $media) {
+        if (! $media instanceof MediaEntityInterface) {
             return 'Media is invalid.';
         } elseif ($media->getMediaPrivat() && ! $isUserLoggedIn) {
             return 'Media is not public.';
@@ -167,7 +167,7 @@ class MediaStorageProvider implements MediaStorageProviderInterface
 
     public static function getMediaIdFromUrl(string $url): ?int
     {
-        if (preg_match('/^\/media\/([0-9]+)$/', $url, $matches)) {
+        if (preg_match('/^\/media\/(\d+)$/', $url, $matches)) {
             return (int) $matches[1];
         }
         return null;

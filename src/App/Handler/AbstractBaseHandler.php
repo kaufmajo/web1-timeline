@@ -30,7 +30,7 @@ abstract class AbstractBaseHandler implements RequestHandlerInterface
 
     public function flashMessages(ServerRequestInterface $request): FlashMessagesInterface
     {
-        if (null === $this->flashMessages) {
+        if (!$this->flashMessages instanceof FlashMessagesInterface) {
 
             $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
         }
