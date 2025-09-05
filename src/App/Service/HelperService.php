@@ -165,9 +165,6 @@ class HelperService
     //
     //-----------------------------------------------
 
-    /**
-     * @return array
-     */
     public static function getBrowserCacheHeaders(int $lifetime): array
     {
         return [

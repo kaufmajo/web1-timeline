@@ -171,7 +171,7 @@ class CleanupHandler extends AbstractBaseHandler
 
             $matches = [];
 
-            preg_match('/[0-9]+/', $filename, $matches);
+            preg_match('/\d+/', $filename, $matches);
 
             $sql6 = '
                 SELECT 
@@ -179,7 +179,7 @@ class CleanupHandler extends AbstractBaseHandler
                 FROM
                     `tajo1_media`
                 WHERE
-                    `media_id` = ' . $dbal->quote((string)$matches[0]);
+                    `media_id` = ' . $dbal->quote($matches[0]);
 
             $result6 = $dbal->executeQuery($sql6);
 

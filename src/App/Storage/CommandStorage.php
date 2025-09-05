@@ -9,14 +9,11 @@ use Exception;
 
 class CommandStorage
 {
-    /** @var array */
     protected array $commandArray = [];
 
     public function set(string $key, CommandInterface $command): void
     {
-        if ($command instanceof CommandInterface) {
-            $this->commandArray[$key] = $command;
-        }
+        $this->commandArray[$key] = $command;
     }
 
     /**

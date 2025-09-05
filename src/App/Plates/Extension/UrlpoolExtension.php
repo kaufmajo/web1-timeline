@@ -15,8 +15,6 @@ class UrlpoolExtension implements ExtensionInterface
 
     public Template $template;
 
-    public function __construct() {}
-
     public function register(Engine $engine): void
     {
         $this->engine = $engine;

@@ -319,7 +319,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->addSelect('IF(:p1 > DATEDIFF(CURDATE(), termin_erstellt_am), 1, 0) AS _is_new')
             ->addSelect('IF(:p2 > DATEDIFF(CURDATE(), termin_aktualisiert_am_trigger), 1, 0) AS _is_updated')
             ->from('tajo1_datum', 't3')
-            ->leftJoin('t3', 'cte1', 't4', (string)$this->getTerminJoinCondition($qb, $params))
+            ->leftJoin('t3', 'cte1', 't4', $this->getTerminJoinCondition($qb, $params))
             ->leftJoin('t4', 'cte2', 'k', 't4.termin_id = k.termin_id')
             ->leftJoin('t4', 'cte3', 'f', 't4.termin_id = f.termin_id')
             ->where((string)$this->getWhereCondition($qb, $params))

@@ -9,7 +9,6 @@ use Exception;
 
 class EntityStorage
 {
-    /** @var array */
     protected array $entityArray = [];
 
     public function set(string $key, EntityInterface $entity, ?EntityInterface $protoType = null): void

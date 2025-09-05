@@ -14,8 +14,6 @@ class QuoteExtension implements ExtensionInterface
 
     public Template $template;
 
-    public function __construct() {}
-
     public function register(Engine $engine): void
     {
         $this->engine = $engine;
@@ -25,8 +23,6 @@ class QuoteExtension implements ExtensionInterface
 
     public function quote(): string
     {
-        $data = $this->template->data();
-
         return 'Character, not circumstances makes the man.';
     }
 }

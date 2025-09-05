@@ -58,7 +58,7 @@ class AttributeService
     {
         $excludes = is_string($excludes) ? [$excludes] : $excludes;
 
-        return implode(' ', array_map(function ($attribute) use ($excludes): ?string {
+        return implode(' ', array_map(function (int| string $attribute) use ($excludes): ?string {
             if (! in_array($attribute, $excludes)) {
                 return $this->getAttrKeyValue($attribute);
             } else {

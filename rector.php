@@ -15,9 +15,10 @@ return RectorConfig::configure()
     // uncomment to reach your current PHP version
     ->withPhpSets(php84: true)
     ->withPreparedSets(typeDeclarations: true)
-    //->withTypeCoverageLevel(50)
-    ->withDeadCodeLevel(0)
-    ->withCodeQualityLevel(0)
+    ->withPreparedSets(deadCode: true)
+    //->withTypeCoverageLevel(70)
+    //->withDeadCodeLevel(70)
+    ->withCodeQualityLevel(30)
     ->withSkip([
         FirstClassCallableRector::class => [
             __DIR__ . '/src/App/Plates/Extension/ColorExtension.php',

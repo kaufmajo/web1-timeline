@@ -11,19 +11,13 @@ class HistoryService
     protected const CONST_THROTTLE       = 'Throttle';
     protected const CONST_THROTTLE_COUNT = 7;
 
-    public function __construct(protected Connection $dbal)
-    {
-        $this->dbal = $dbal;
-    }
+    public function __construct(protected Connection $dbal) {}
 
     public function getUrlString(): string
     {
         $url  = isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS'] ? 'https://' : 'http://';
-        $url .= $_SERVER['SERVER_NAME'];
-        $url .= ':' . $_SERVER['SERVER_PORT'];
-        $url .= $_SERVER['REQUEST_URI'];
 
-        return $url;
+        return $url . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];;
     }
 
     public function insertRow(): static

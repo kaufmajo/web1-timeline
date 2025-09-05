@@ -26,7 +26,7 @@ class LoggingErrorListener
             self::LOG_FORMAT,
             $response->getStatusCode(),
             'Method:' . $request->getMethod(),
-            'Uri:' . (string) $request->getUri(),
+            'Uri:' . $request->getUri(),
             'Message:' . $error->getMessage() . ' File:' . $error->getFile() . ' Line:' . $error->getLine()
         ));
     }

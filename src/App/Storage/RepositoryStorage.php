@@ -9,14 +9,11 @@ use Exception;
 
 class RepositoryStorage
 {
-    /** @var array */
     protected array $repositoryArray = [];
 
     public function set(string $key, RepositoryInterface $repository): void
     {
-        if ($repository instanceof RepositoryInterface) {
-            $this->repositoryArray[$key] = $repository;
-        }
+        $this->repositoryArray[$key] = $repository;
     }
 
     /**

@@ -10,9 +10,6 @@ trait TerminCommandAwareTrait
 {
     protected TerminCommandInterface $terminCommand;
 
-    /**
-     * @return TerminCommandInterface
-     */
     public function getTerminCommand(): TerminCommandInterface
     {
         return $this->terminCommand;

@@ -12,10 +12,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LogoutHandler implements RequestHandlerInterface
 {
-    public function __construct()
-    {
-    }
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /** @var Session $session */

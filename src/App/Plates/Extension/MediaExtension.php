@@ -17,10 +17,7 @@ class MediaExtension implements ExtensionInterface
 
     public Template $template;
 
-    public function __construct(protected MediaRepositoryInterface $mediaRepository)
-    {
-        $this->mediaRepository = $mediaRepository;
-    }
+    public function __construct(protected MediaRepositoryInterface $mediaRepository) {}
 
     public function register(Engine $engine): void
     {
