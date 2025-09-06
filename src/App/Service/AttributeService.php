@@ -34,14 +34,14 @@ class AttributeService
         }
     }
 
-    public function getAttrValue(string $attribute): ?string
+    public function getAttrValue(string $attribute): string
     {
         $string = $this->getAttrKeyValue($attribute);
 
-        return $string ? trim(substr($string, strpos($string, '=') + 1), '"') : '';
+        return $string !== '' ? trim(substr($string, strpos($string, '=') + 1), '"') : '';
     }
 
-    public function getAttrKeyValue(string $attribute): ?string
+    public function getAttrKeyValue(string $attribute): string
     {
         if (isset($this->attributes[$attribute])) {
             if ('name' === $attribute && (in_array('multiple', $this->attributes))) {
@@ -54,11 +54,11 @@ class AttributeService
         return '';
     }
 
-    public function getAllWithout(string|array $excludes = []): ?string
+    public function getAllWithout(string|array $excludes = []): string
     {
         $excludes = is_string($excludes) ? [$excludes] : $excludes;
 
-        return implode(' ', array_map(function (int| string $attribute) use ($excludes): ?string {
+        return implode(' ', array_map(function (int | string $attribute) use ($excludes): string {
             if (! in_array($attribute, $excludes)) {
                 return $this->getAttrKeyValue($attribute);
             } else {
