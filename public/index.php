@@ -56,7 +56,7 @@ if (isset($_SERVER['HTTP_HOST']) &&     ($_SERVER['HTTP_HOST'] === 'localhost:88
 // -------------------------
 
 chdir(dirname(__DIR__));
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /**
  * Self-called anonymous function that creates its own scope and keep the global namespace clean.

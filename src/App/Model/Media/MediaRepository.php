@@ -40,7 +40,9 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
 
         $result = $qb->fetchAssociative();
 
-        if (!$result) return null;
+        if (!$result) {
+            return null;
+        }
 
         $entity = $this->hydrateEntity($result);
 

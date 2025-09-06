@@ -25,7 +25,7 @@ class AttributeService
 
     public function add(string $attribute, string $value): void
     {
-        if (! empty($value)) {
+        if ($value !== '') {
             if (isset($this->attributes[$attribute])) {
                 $this->attributes[$attribute] .= ' ' . $value;
             } else {

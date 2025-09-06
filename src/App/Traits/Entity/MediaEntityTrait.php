@@ -15,9 +15,9 @@ trait MediaEntityTrait
     /**
      * @throws Exception
      */
-    public function getMediaEntityById(int $id, string $return = ReturnEnum::NOT_FOUND_EXCEPTION, ?MediaEntityInterface $protoType = null): MediaEntityInterface
+    public function getMediaEntityById(int $id, string $return = ReturnEnum::NOT_FOUND_EXCEPTION, ?MediaEntityInterface $protoType = null): ?MediaEntityInterface
     {
-        if (ReturnEnum::NEW_ENTITY === $return && null === $protoType) {
+        if (ReturnEnum::NEW_ENTITY === $return && !$protoType instanceof MediaEntityInterface) {
             throw new Exception('A prototype is required.');
         }
 

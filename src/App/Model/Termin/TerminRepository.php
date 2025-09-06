@@ -40,7 +40,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
 
         $result = $qb->fetchAssociative();
 
-        if (!$result) return null;
+        if (!$result) {
+            return null;
+        }
 
         $entity = $this->hydrateEntity($result);
 
@@ -165,7 +167,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
         return (string)$expr->and(...$conditions);
     }
 
-    protected function getWhereCondition(QueryBuilder $qb, array $params = []): ?string
+    protected function getWhereCondition(QueryBuilder $qb, array $params = []): string
     {
         $conditions = [];
         $expr = $qb->expr();
@@ -322,7 +324,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->leftJoin('t3', 'cte1', 't4', $this->getTerminJoinCondition($qb, $params))
             ->leftJoin('t4', 'cte2', 'k', 't4.termin_id = k.termin_id')
             ->leftJoin('t4', 'cte3', 'f', 't4.termin_id = f.termin_id')
-            ->where((string)$this->getWhereCondition($qb, $params))
+            ->where($this->getWhereCondition($qb, $params))
             ->groupBy(implode(",", $groupBy))
             ->orderBy($order)
             ->setParameter('p1', $initConfig['considered_as_new'])
@@ -357,10 +359,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
@@ -385,10 +386,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
@@ -413,10 +413,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
@@ -441,10 +440,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
@@ -469,10 +467,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
@@ -517,10 +514,9 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             ->orderBy($order);
 
         // where
-        $where = $this->getWhereCondition($qb, $params);
-
-        if (!empty($where))
+        if ('' !== ($where = $this->getWhereCondition($qb, $params))) {
             $qb->andWhere($where);
+        }
 
         // return
         return $qb->fetchAllAssociative();
