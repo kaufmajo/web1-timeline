@@ -17,11 +17,9 @@ class TerminCollection extends AbstractCollection
 {
     protected array $onlyOnceArray = [];
 
-    protected ?DateTimeInterface $referenzDatum;
-
-    public function __construct(DateTimeInterface|string|null $referenzDatum = null)
+    public function __construct(protected DateTimeInterface|string|null $referenzDatum = null)
     {
-        if ($referenzDatum) {
+        if (null !== $referenzDatum) {
             $this->referenzDatum = is_string($referenzDatum) ? new DateTimeImmutable($referenzDatum) : $referenzDatum;
         } else {
             $this->referenzDatum = $referenzDatum;
@@ -60,6 +58,11 @@ class TerminCollection extends AbstractCollection
         }
 
         return false;
+    }
+
+    public function isDatumInThePast(): bool
+    {
+        return $this->getDatum()->setTime(0, 0) < (new DateTime('now'))->setTime(0, 0);
     }
 
     public function isDatumFirstDayOfMonth(): bool
@@ -112,7 +115,7 @@ class TerminCollection extends AbstractCollection
         }
     }
 
-    public function isReferenzThisYear(): bool
+    public function isReferenzDatumThisYear(): bool
     {
         if ($this->referenzDatum instanceof DateTimeInterface) {
             return $this->referenzDatum->format('Y') === (new DateTime())->format('Y');

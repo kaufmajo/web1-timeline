@@ -25,7 +25,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
         </a>
         <span class="fw-light">
             <?= HelperService::format_displayDate($terminCollection->getReferenzDatum(), null, [
-                'single' => $terminCollection->isReferenzThisYear() ? 'LLLL' : 'LLLL yy',
+                'single' => $terminCollection->isReferenzDatumThisYear() ? 'LLLL' : 'LLLL yy',
             ]) ?>
             <a class="<?= $this->color()['link-main'] ?>" href="<?= $searchUrl ?>"><i class="bi bi-search ms-3"></i></a>
         </span>
@@ -55,13 +55,10 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                         <li class="p-2 <?= $listClass ?>" <?= HelperService::getAnchorAttribute($termin['datum_datum']) ?>>
                             <div class="d-flex justify-content-between w-100 fw-light text-secondary-emphasis">
                                 <div>
-                                    <?php if ($terminCollection->isDatumFirstDayOfMonth()) : ?>
-                                        <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-lg-inline-block"></i>
-                                    <?php endif ?>
                                     <?php if ($terminCollection->isDatumToday()) : ?>
                                         <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
                                     <?php elseif (!$terminCollection->isDatumToday()) : ?>
-                                        <span class="me-1">
+                                        <span class="me-1 <?= $terminCollection->isDatumInThePast() ? "text-decoration-line-through" : "" ?>">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
                                         </span>
                                     <?php endif ?>
@@ -69,6 +66,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                         <span class="d-none d-lg-inline-block">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'MMMM',]) ?>
                                         </span>
+                                        <i class="bi bi-caret-right-fill <?= $this->color()['text-main'] ?> d-none d-lg-inline-block"></i>
                                     <?php endif ?>
                                 </div>
                                 <div>
