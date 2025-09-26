@@ -28,13 +28,13 @@ class TerminDeleteHandlerTest extends TestCase
 
         $request = new ServerRequest();
 
-    $handler = new TerminDeleteHandler();
-    $handler->setTerminRepository($repo);
-    $handler->setTemplateRenderer($renderer);
-    // initialize required services that are typed properties
-    $handler->setTerminCommand($this->createMock(\App\Model\Termin\TerminCommandInterface::class));
-    $handler->setUrlpoolService($this->createMock(\App\Service\UrlpoolService::class));
-    $handler->setConfig(['my_init_config' => []]);
+        $handler = new TerminDeleteHandler();
+        $handler->setTerminRepository($repo);
+        $handler->setTemplateRenderer($renderer);
+        // initialize required services that are typed properties
+        $handler->setTerminCommand($this->createMock(\App\Model\Termin\TerminCommandInterface::class));
+        $handler->setUrlpoolService($this->createMock(\App\Service\UrlpoolService::class));
+        $handler->setConfig(['my_init_config' => []]);
 
         $response = $handler->handle($request->withAttribute('p1', 1));
 
@@ -56,11 +56,11 @@ class TerminDeleteHandlerTest extends TestCase
 
         $request = (new ServerRequest())->withMethod('POST')->withParsedBody([]);
 
-    $handler = new TerminDeleteHandler();
-    $handler->setTerminRepository($repo);
-    $handler->setUrlpoolService($urlpool);
-    $handler->setTerminCommand($this->createMock(\App\Model\Termin\TerminCommandInterface::class));
-    $handler->setConfig(['my_init_config' => []]);
+        $handler = new TerminDeleteHandler();
+        $handler->setTerminRepository($repo);
+        $handler->setUrlpoolService($urlpool);
+        $handler->setTerminCommand($this->createMock(\App\Model\Termin\TerminCommandInterface::class));
+        $handler->setConfig(['my_init_config' => []]);
 
         $response = $handler->handle($request->withAttribute('p1', 2));
 
@@ -83,19 +83,19 @@ class TerminDeleteHandlerTest extends TestCase
         $urlpool = $this->createMock(\App\Service\UrlpoolService::class);
         $urlpool->method('get')->willReturn('/manage');
 
-    $flash = $this->createMock(\Mezzio\Flash\FlashMessagesInterface::class);
-    $flash->expects($this->once())->method('flash')->with('secondary', 'default');
+        $flash = $this->createMock(\Mezzio\Flash\FlashMessagesInterface::class);
+        $flash->expects($this->once())->method('flash')->with('secondary', 'default');
 
         $request = (new ServerRequest())
             ->withMethod('POST')
             ->withParsedBody(['confirm' => 'Löschen'])
             ->withAttribute('session', $this->createMock(\Mezzio\Session\SessionInterface::class));
 
-    $handler = new TerminDeleteHandler();
-    $handler->setTerminRepository($repo);
-    $handler->setTerminCommand($terminCommand);
-    $handler->setUrlpoolService($urlpool);
-    $handler->setConfig(['my_init_config' => []]);
+        $handler = new TerminDeleteHandler();
+        $handler->setTerminRepository($repo);
+        $handler->setTerminCommand($terminCommand);
+        $handler->setUrlpoolService($urlpool);
+        $handler->setConfig(['my_init_config' => []]);
 
         // inject flashMessages via overriding property
         $handlerReflection = new \ReflectionObject($handler);
