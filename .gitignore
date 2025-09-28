@@ -1,11 +1,11 @@
 .idea
 .phpcs-cache
-.phpunit.cache
-.vscode
 clover.xml
 coveralls-upload.json
 phpunit.xml
 composer.lock
 
+.phpunit.cache/
+.vscode/
 nbproject/
 vendor/
