@@ -19,6 +19,12 @@ ol>li {
     overflow-y: auto;
 }
 
+.highlight {
+    transform: rotateY(360deg);
+    transition: 2s linear;
+    z-index: 9999;
+}
+
 @media (min-width: 992px) {
 
     ol {
@@ -29,10 +35,4 @@ ol>li {
     ol>li {
         min-height: auto;
     }
-}
-
-.highlight {
-    transform: rotateY(360deg);
-    transition: 2s linear;
-    z-index: 9999;
 }
