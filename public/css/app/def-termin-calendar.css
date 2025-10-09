@@ -36,3 +36,62 @@ ol>li {
         min-height: auto;
     }
 }
+
+/* Crossfade animation between two elements */
+
+.crossfade {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+}
+
+.crossfade .element {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.6s ease;
+    white-space: nowrap;
+}
+
+/* start visible */
+.crossfade .one {
+    opacity: 1;
+    animation: fadeOut 1.2s ease forwards;
+    animation-delay: 0.5s;
+    /* fade out once */
+}
+
+/* start hidden, fade in */
+.crossfade .two {
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 1.7s;
+    /* starts after .one begins fading out */
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* accessibility: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+    .crossfade i {
+        transition: none;
+        animation: none;
+    }
+}
