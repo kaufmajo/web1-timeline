@@ -1,3 +1,5 @@
+/* ---------------------------------------- */
+
 html {
     scroll-padding-top: 80px;
     height: 100%;
@@ -37,6 +39,7 @@ ol>li {
     }
 }
 
+/* ---------------------------------------- */
 /* Crossfade animation between two elements */
 
 .crossfade {
@@ -46,7 +49,6 @@ ol>li {
 }
 
 .crossfade .element {
-    position: absolute;
     inset: 0;
     transition: opacity 0.6s ease;
     white-space: nowrap;
@@ -57,7 +59,6 @@ ol>li {
     opacity: 1;
     animation: fadeOut 1.2s ease forwards;
     animation-delay: 0.5s;
-    /* fade out once */
 }
 
 /* start hidden, fade in */
@@ -65,7 +66,6 @@ ol>li {
     opacity: 0;
     animation: fadeIn 2s ease forwards;
     animation-delay: 1.7s;
-    /* starts after .one begins fading out */
 }
 
 @keyframes fadeOut {
@@ -87,3 +87,5 @@ ol>li {
         opacity: 1;
     }
 }
+
+/* ---------------------------------------- */

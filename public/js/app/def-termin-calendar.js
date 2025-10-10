@@ -42,7 +42,7 @@ for (let i = 0, len = highlightElements.length; i < len; i++) {
 }
 
 // ---------------------------------------------------------------------------
-// One-time "Nudge"
+// One-time "Nudge=Stubs"
 
 const gridCells = document.querySelectorAll("ol>li");
 
@@ -84,7 +84,7 @@ async function animateScrolling(container) {
     await smoothScrollTo(container, 0, 2000);
 }
 
-// On window load, scroll all overflowing gridCells one after the other
+// On window load, scroll all overflowing gridCells
 window.addEventListener('load', async () => {
     const tasks = [];
     for (let container of gridCells) {
@@ -94,6 +94,23 @@ window.addEventListener('load', async () => {
         }
     }
     await Promise.all(tasks); // Wait for all to finish (optional)
+});
+
+// ---------------------------------------------------------------------------
+// Crossfade animation handling
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all crossfade blocks (in case you have multiple)
+    document.querySelectorAll('.crossfade').forEach(crossfade => {
+        const first = crossfade.querySelector('.one');
+
+        // When the fadeOut animation finishes, hide it
+        first.addEventListener('animationend', (e) => {
+            if (e.animationName === 'fadeOut') {
+                first.style.display = 'none';
+            }
+        });
+    });
 });
 
 // ---------------------------------------------------------------------------
