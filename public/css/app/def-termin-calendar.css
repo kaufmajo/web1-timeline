@@ -87,11 +87,3 @@ ol>li {
         opacity: 1;
     }
 }
-
-/* accessibility: respect user preference */
-@media (prefers-reduced-motion: reduce) {
-    .crossfade i {
-        transition: none;
-        animation: none;
-    }
-}
