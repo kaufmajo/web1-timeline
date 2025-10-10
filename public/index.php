@@ -17,7 +17,7 @@ ini_set("session.cookie_lifetime", 3600);
 // start custom bootstrap code
 // -------------------------
 
-const REFRESH_STATIC_FILES = '28';
+const REFRESH_STATIC_FILES = '29';
 
 function ddd(mixed $var): never
 {
