@@ -89,7 +89,11 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                             $highlightAttribute = $terminIdParam === $termin['termin_id'] ? HelperService::getAttribute('data-highlight', '1') : '';
                             ?>
                             <?php if ($termin['termin_image'] && $terminCollection->pushToMemory('image', $termin['termin_id'])) : ?>
-                                <a href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>" class="<?= $linkColor ?> text-decoration-none" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
+                                <a
+                                    href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>"
+                                    class="<?= $linkColor ?> text-decoration-none"
+                                    <?= HelperService::getAttribute('target', ['show', $termin['termin_id']]) ?>
+                                    <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
                                     <img class="d-block d-lg-none my-2 w-100" src="<?= $this->media($termin['termin_image']) ?>?w=1400" alt="Thumbnail">
                                 </a>
                             <?php endif ?>
@@ -104,7 +108,11 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                     <?php if (TerminStatusEnum::MITTEILUNG->value === $termin['termin_status']) : ?>
                                         <i class="bi bi-info-circle-fill me-1 <?= $this->color()['text-main'] ?>"></i>
                                     <?php endif ?>
-                                    <a href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>" class="<?= $linkColor ?> text-decoration-none" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
+                                    <a
+                                        href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>"
+                                        class="<?= $linkColor ?> text-decoration-none"
+                                        <?= HelperService::getAttribute('target', ['show', $termin['termin_id']]) ?>
+                                        <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
                                         <span class="me-2">
                                             <?= $this->escape($termin['termin_betreff']) ?>
                                         </span>
@@ -132,7 +140,11 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                                         <?php endif ?>
                                     <?php endif ?>
                                     <?php if ($termin['termin_text']) : ?>
-                                        <a href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>" class="<?= $linkColor ?> text-decoration-none" <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
+                                        <a
+                                            href="/show/<?= $this->escape($termin['termin_id']) ?>?back=<?= $prevnextUrl ?>"
+                                            class="<?= $linkColor ?> text-decoration-none"
+                                            <?= HelperService::getAttribute('target', ['show', $termin['termin_id']]) ?>
+                                            <?= HelperService::getAnchorAttribute($terminCollection->pushToMemory('calenderlist-anchor-id', $termin['termin_id'])) ?>>
                                             <div class="opacity-50">
                                                 <?= nl2br($this->escape(HelperService::string_substrWords($termin['termin_text'], 30))) ?>
                                             </div>
