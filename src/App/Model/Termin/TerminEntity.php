@@ -49,8 +49,6 @@ class TerminEntity extends AbstractEntity implements TerminEntityInterface
 
     protected ?string $termin_serie_ende = null;
 
-    protected ?int $termin_ist_geloescht = 0;
-
     protected ?int $termin_zeige_konflikt = 1;
 
     protected ?int $termin_aktiviere_drucken = 1;
@@ -85,7 +83,6 @@ class TerminEntity extends AbstractEntity implements TerminEntityInterface
         'termin_serie_intervall',
         'termin_serie_wiederholung',
         'termin_serie_ende',
-        'termin_ist_geloescht',
         'termin_zeige_konflikt',
         'termin_aktiviere_drucken',
         'termin_ansicht',
@@ -317,16 +314,6 @@ class TerminEntity extends AbstractEntity implements TerminEntityInterface
     public function setTerminSerieEnde(?string $value): void
     {
         $this->termin_serie_ende = $value;
-    }
-
-    public function getTerminIstGeloescht(): ?int
-    {
-        return $this->termin_ist_geloescht;
-    }
-
-    public function setTerminIstGeloescht(?int $value): void
-    {
-        $this->termin_ist_geloescht = $value;
     }
 
     public function getTerminZeigeKonflikt(): ?int

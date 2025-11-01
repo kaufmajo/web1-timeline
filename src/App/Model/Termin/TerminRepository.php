@@ -61,9 +61,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
 
         $conditions[] = $expr->and(
             $expr->eq('t4.datum_id', 't3.datum_id'),
-            $expr->eq('t4.termin_ist_geloescht', ':join_ist_geloescht')
         );
-        $qb->setParameter('join_ist_geloescht', 0, \Doctrine\DBAL\ParameterType::INTEGER);
 
         // id
         if (isset($params['id']) && !empty($params['id'])) {
@@ -234,7 +232,6 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
                 't4',
                 '
                 `c1`.`termin_ist_konfliktrelevant` = 1 AND
-                `c1`.`termin_ist_geloescht` = 0 AND
                 `c1`.`termin_id` <> `t4`.`termin_id` AND 
                 (
                         (TIMESTAMP(`t4`.`termin_datum_start`, `t4`.`termin_zeit_start`) BETWEEN TIMESTAMP(`c1`.`termin_datum_start`,`c1`.`termin_zeit_start`) AND TIMESTAMP(`c1`.`termin_datum_ende`,`c1`.`termin_zeit_ende`)) 
@@ -258,7 +255,6 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
                 't4',
                 "
                 `c1`.`termin_ist_konfliktrelevant` = 1 AND
-                `c1`.`termin_ist_geloescht` = 0 AND
                 `c1`.`termin_id` <> `t4`.`termin_id` AND 
                 (
                         (TIMESTAMP(`t4`.`termin_datum_start`, `t4`.`termin_zeit_start`) BETWEEN TIMESTAMP(`c1`.`termin_datum_start`,`c1`.`termin_zeit_start`) AND TIMESTAMP(`c1`.`termin_datum_ende`,`c1`.`termin_zeit_ende`)) 

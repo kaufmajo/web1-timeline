@@ -85,10 +85,6 @@ interface TerminEntityInterface extends EntityInterface
 
     public function setTerminSerieEnde(?string $value);
 
-    public function getTerminIstGeloescht(): ?int;
-
-    public function setTerminIstGeloescht(?int $value);
-
     public function getTerminZeigeKonflikt(): ?int;
 
     public function setTerminZeigeKonflikt(?int $value);
