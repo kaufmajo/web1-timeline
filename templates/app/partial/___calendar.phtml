@@ -56,9 +56,7 @@ $loggedIn = isset($this->data['security']) ? $this->data['security']->getIdentit
                             <div class="d-flex justify-content-between w-100 fw-light text-secondary-emphasis">
                                 <div>
                                     <?php if ($terminCollection->isDatumToday()) : ?>
-                                        <div>
-                                            <i class="bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
-                                        </div>
+                                        <i class="me-1 bi bi-check-circle-fill <?= $this->color()['text-main'] ?>"></i>
                                     <?php elseif (!$terminCollection->isDatumToday()) : ?>
                                         <span class="me-1 <?= $terminCollection->isDatumInThePast() ? "text-decoration-line-through" : "" ?>">
                                             <?= HelperService::format_displayDate($terminCollection->getDatum(), null, ['single' => 'd',]) ?>
