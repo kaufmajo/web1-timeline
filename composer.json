@@ -21,6 +21,9 @@
       "composer/package-versions-deprecated": true,
       "laminas/laminas-component-installer": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "8.4.1"
     }
   },
   "extra": {

@@ -46,7 +46,7 @@ class TerminCollection extends AbstractCollection
 
         if ($termin && $termin['termin_id']) {
 
-            if (1 === (int) $termin['termin_zeige_einmalig'] && in_array($termin['termin_id'], $this->onlyOnceArray)) {
+            if (1 === (int) $termin['termin_zeige_einmalig'] && $this->isDatumInThePast() || in_array($termin['termin_id'], $this->onlyOnceArray)) {
                 return false;
             }
 
