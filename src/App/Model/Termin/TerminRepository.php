@@ -149,7 +149,8 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             $conditions[] =
                 $expr->or(
                     $expr->isNull('t4.termin_zeige_tagezuvor'),
-                    $expr->lt('DATEDIFF(`t3`.`datum_datum`, CURRENT_DATE())', '`t4`.`termin_zeige_tagezuvor`')
+                    $expr->lt('DATEDIFF(`t4`.`termin_datum_start`, CURRENT_DATE())', '`t4`.`termin_zeige_tagezuvor`')
+                    //$expr->lt('DATEDIFF(`t3`.`datum_datum`, CURRENT_DATE())', '`t4`.`termin_zeige_tagezuvor`')
                 );
         }
 
@@ -309,7 +310,7 @@ class TerminRepository extends AbstractRepository implements TerminRepositoryInt
             'k._konflikt',
             'f._fehlbuchung'
         )
-            ->addSelect('IF(t4.termin_datum_start = t3.datum_datum, t4.termin_zeit_start, null) AS termin_zeit_start')
+            ->addSelect('IF(t4.termin_datum_start = t3.datum_datum OR t4.termin_zeige_einmalig = 1, t4.termin_zeit_start, null) AS termin_zeit_start')
             ->addSelect('IF(t4.termin_datum_ende = t3.datum_datum, t4.termin_zeit_ende, null) AS termin_zeit_ende')
             ->addSelect('(DATEDIFF(termin_datum_ende, termin_datum_start) + 1) AS _anzahl_tage')
             ->addSelect('UNIX_TIMESTAMP(DATE_FORMAT(termin_datum_start, "%Y-%m-%d 00:00:00")) AS _tag_start_uts')
